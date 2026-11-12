@@ -1,6 +1,14 @@
-node_modules/
-venv/
-__pycache__/
+# Private uploaded business data
+backend/storage/
+
+# Environment secrets
 backend/.env
-dist/
+
+# Python
+__pycache__/
 *.pyc
+venv/
+
+# Frontend
+node_modules/
+dist/

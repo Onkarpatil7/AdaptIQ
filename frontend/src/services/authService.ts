@@ -59,3 +59,39 @@ export function loginUser(payload: LoginPayload) {
 export function registerUser(payload: RegisterPayload) {
   return request("/api/v1/auth/register", payload);
 }
+
+
+
+import { apiFetch } from "./api";
+
+export interface AuthUser {
+  id: string;
+  full_name: string;
+  email: string;
+  is_active: boolean;
+}
+
+
+export async function getCurrentUser() {
+  const response = await apiFetch("/api/v1/auth/me");
+
+  const data = await response.json();
+
+  if (!response.ok) {
+    throw new Error(data.detail || "Authentication required");
+  }
+
+  return data;
+}
+
+export async function logoutUser() {
+  const response = await apiFetch("/api/v1/auth/logout", {
+    method: "POST",
+  });
+
+  if (!response.ok) {
+    throw new Error("Logout failed");
+  }
+
+  return true;
+}
